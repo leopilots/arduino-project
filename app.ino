@@ -14,7 +14,7 @@ void setup() {
     pinMode(PinIN2, OUTPUT);
     pinMode(PinIN3, OUTPUT);
     pinMode(PinIN4, OUTPUT);
-    pinMode(PinSensorIzq, INPUT); //sensor izquiero
+    pinMode(PinSensorIzq, INPUT); //sensor izquierdo
     pinMode(PinSensorDer, INPUT); //sensor derecho
     pinMode(PinSensorMed, INPUT); //sensor del medio
 }
@@ -28,18 +28,11 @@ void loop() {
     sensorDer = digitalRead(PinSensorDer);
     sensorMed = digitalRead(PinSensorMed);
 
-    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == HIGH) {                                 
-        EngineForward();                                                                            
-    }
-    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == LOW) {
-        EngineStop();                                                                               
-    }
-    if(sensorIzq == HIGH && sensorDer == LOW && sensorMed == LOW) {                                   
-        RightEngine();                                                                              
-    }
-    if(sensorDer == HIGH && sensorIzq == LOW && sensorMed == LOW) {                                 
-        LeftEngine();                                                                               
-    }
+    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == HIGH) { EngineForward(); }
+    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == LOW) { EngineStop(); }
+    if(sensorIzq == HIGH && sensorDer == LOW && sensorMed == LOW) { RightEngine(); }
+    if(sensorDer == HIGH && sensorIzq == LOW && sensorMed == LOW) { LeftEngine(); }
+
     delay(20); 
 }
 

@@ -16,7 +16,7 @@ void setup() {
     pinMode(PinIN2, OUTPUT);
     pinMode(PinIN3, OUTPUT);
     pinMode(PinIN4, OUTPUT);
-    pinMode(PinSensorIzq, INPUT); //sensor izquiero
+    pinMode(PinSensorIzq, INPUT); //sensor izquierdo
     pinMode(PinSensorDer, INPUT); //sensor derecho
     pinMode(PinSensorMed, INPUT); //sensor del medio
 }
@@ -47,6 +47,7 @@ void loop() {
     if(sensorDer == HIGH && sensorIzq == LOW && sensorMed == LOW) {                                 //el sensor derecho detecta una zona oscura y los demás no
         LeftEngine();                                                                               //llamamos la función (arranca motor izquierdo)
     }
+
     delay(20); //tiempo en el que leemos los sensores
 }
 
