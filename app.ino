@@ -1,10 +1,8 @@
-static int PinIN1 = 2;
-static int PinIN2 = 3;
-static int PinIN3 = 4;
-static int PinIN4 = 5;
-static int PinSensorIzq = 8;
-static int PinSensorDer = 9;
-static int PinSensorMed = 10;
+static int PinIN1 = 8; //motor izquierdo
+static int PinIN2 = 9; //motor derecho
+static int PinSensorIzq = 5;
+static int PinSensorDer = 6;
+static int PinSensorMed = 7;
 
 void setup() {
     //iniciamos las comunicaciones con el puerto serie para el monitor serie
@@ -12,8 +10,7 @@ void setup() {
 
     pinMode(PinIN1, OUTPUT);
     pinMode(PinIN2, OUTPUT);
-    pinMode(PinIN3, OUTPUT);
-    pinMode(PinIN4, OUTPUT);
+
     pinMode(PinSensorIzq, INPUT); //sensor izquierdo
     pinMode(PinSensorDer, INPUT); //sensor derecho
     pinMode(PinSensorMed, INPUT); //sensor del medio
@@ -28,39 +25,31 @@ void loop() {
     sensorDer = digitalRead(PinSensorDer);
     sensorMed = digitalRead(PinSensorMed);
 
-    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == HIGH) { EngineForward(); }
-    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == LOW) { EngineStop(); }
-    if(sensorIzq == HIGH && sensorDer == LOW && sensorMed == LOW) { RightEngine(); }
-    if(sensorDer == HIGH && sensorIzq == LOW && sensorMed == LOW) { LeftEngine(); }
+    if(sensorIzq == LOW && sensorDer == LOW && sensorMed == HIGH) { EngineForward(); Serial.print("sensor del medio.\n"); }
+    //if(sensorIzq == LOW && sensorDer == LOW && sensorMed == LOW) { EngineStop();  }
+    if(sensorIzq == HIGH && sensorDer == LOW && sensorMed == LOW) { RightEngine(); Serial.print("sensor izquierdo\n"); }
+    if(sensorDer == HIGH && sensorIzq == LOW && sensorMed == LOW) { LeftEngine(); Serial.print("sensor derecho\n"); }
 
     delay(20); 
 }
 
 // funciones
 void EngineForward() {
-    digitalWrite (PinIN1, LOW);   //motor izquierdo adelante
-    digitalWrite (PinIN2, HIGH); 
-    digitalWrite (PinIN3, HIGH);  //motor derecho adelante
-    digitalWrite (PinIN4, LOW); 
+    digitalWrite (PinIN1, HIGH);   //motor izquierdo adelante
+    digitalWrite (PinIN2, HIGH);   //motor derecho adelante
 }
 
 void EngineStop() {
     digitalWrite (PinIN1, LOW);   //motor izquierdo detenido
-    digitalWrite (PinIN2, LOW);
-    digitalWrite (PinIN3, LOW);   //motor derecho detenido 
-    digitalWrite (PinIN4, LOW);
+    digitalWrite (PinIN2, LOW);   //motor derecho detenido
 }
 
 void RightEngine() {
-    digitalWrite (PinIN1, HIGH);  //motor izquierdo atras
-    digitalWrite (PinIN2, LOW);  
-    digitalWrite (PinIN3, HIGH);  //motor derecho adelante
-    digitalWrite (PinIN4, LOW); 
+    digitalWrite(PinIN1, LOW);  //motor izquierdo no avanza
+    digitalWrite(PinIN2, HIGH);  //motor derecho avanza
 }
 
 void LeftEngine() {
-    digitalWrite (PinIN1, LOW);   //motor izquierdo adelante
-    digitalWrite (PinIN2, HIGH);  
-    digitalWrite (PinIN3, LOW);   //motor derecho atras
-    digitalWrite (PinIN4, HIGH);
+    digitalWrite(PinIN1, HIGH);   //motor izquierdo avanza
+    digitalWrite(PinIN2, LOW);    //motor derecho no avanza
 }
