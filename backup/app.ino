@@ -34,11 +34,11 @@ void loop() {
     // ruedas avanzan hacia adelante (arrancar)
     if(sensorIzq == LOW && sensorDer == LOW && sensorMed == HIGH) {                                 //los sensores laterales no detectan una zona oscura y el del medio si, va para adelante
         EngineForward();                                                                            //llamamos la función (avanza para adelante)
-    }
+    }/*
     // ruedas se detienen, los sensores no detectan zonas oscuras
     if(sensorIzq == LOW && sensorDer == LOW && sensorMed == LOW) {
         EngineStop();                                                                               //llamamos la función (detenemos los motores)
-    }
+    }*/
     // el sensor izquierdo detecta una zona oscura, se detiene el mismo y arranca el derecho
     if(sensorIzq == HIGH && sensorDer == LOW && sensorMed == LOW) {                                 //el sensor izquierdo detecta una zona oscura y los demás no  
         RightEngine();                                                                              //llamamos la función (arranca motor derecho)
